@@ -1,0 +1,69 @@
+:root {
+  --animation-time: 1s;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  padding: 16px;
+  text-align: center;
+  color: #222;
+}
+
+button {
+  margin-top: 40px;
+  padding: 15px;
+  background-color: blue;
+  color: white;
+  font-size: 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#overlay {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(50, 50, 50, 0.7);
+}
+#modal {
+  position: relative;
+  margin: 0 auto;
+  padding: 20px;
+  top: 30%;
+  max-width: 600px;
+  height: 200px;
+  background-color: #fff;
+}
+
+/* Animations */
+.fade-in {
+  animation: fadeIn ease var(--animation-time);
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-out {
+  animation: fadeOut ease var(--animation-time);
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 100;
+  }
+  100% {
+    opacity: 0;
+  }
+}
