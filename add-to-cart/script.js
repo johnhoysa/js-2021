@@ -6,9 +6,9 @@ const bike = {
   image: './imgs/bikes/weekender.jpg',
   sizesWithQty: [
     { size: 'small', qty: 15 },
-    { size: 'medium', qty: 23 },
-    { size: 'large', qty: 42 },
-    { size: 'x-large', qty: 34 },
+    { size: 'medium', qty: 13 },
+    { size: 'large', qty: 12 },
+    { size: 'x-large', qty: 14 },
   ],
 };
 
@@ -62,7 +62,7 @@ let removeItem = document.getElementById('removeQty');
 let addItem = document.getElementById('addQty');
 let qtyMessage = document.getElementById('qtyMessage');
 let currentCount = 1;
-let currentTotal = 1;
+let currentTotal = 0;
 let sizeQty = '';
 
 //console.log('what is this? ', addItem);
@@ -77,13 +77,12 @@ for (var i = 0; i < radios.length; i++) {
 
 //console.log('current total is = ', currentTotal);
 
-// Not working
 removeItem.onclick = function (e) {
   e.preventDefault();
 
   currentTotal == currentTotal--;
 
-  console.log('remove item new total = ', currentTotal);
+  console.log('current total is, from remove = ', currentTotal);
 
   if (currentTotal >= 1) {
     itemsToPurchase.innerHTML = currentTotal;
@@ -97,13 +96,18 @@ removeItem.onclick = function (e) {
     itemsToPurchase.innerHTML = currentTotal;
     console.log('below zero yet = ', currentTotal);
   }
+  currentTotal == currentTotal;
+  console.log('current total from remove area = ', currentTotal);
 };
 
-// Working
 addItem.onclick = function (e) {
   e.preventDefault();
   //
-  currentTotal = currentCount++;
+
+  currentTotal == currentTotal++;
+
+  console.log('current total from add area = ', currentTotal);
+
   itemsToPurchase.innerHTML = currentTotal;
 
   if (currentTotal <= sizeQty) {
