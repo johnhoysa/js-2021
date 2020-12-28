@@ -13,9 +13,9 @@ const bike = {
 };
 
 // Get DOM elements
-let cost = document.querySelector('#cost > span');
-let qty = document.querySelector('#qty > span');
-let sizes = document.querySelector('#size > span');
+let displayCost = document.querySelector('#cost > span');
+let displayQty = document.querySelector('#qty > span');
+let displaySizes = document.querySelector('#size > span');
 
 //
 let selectSize = document.getElementById('selectSize');
@@ -26,7 +26,7 @@ let totalQty = 0;
 // Set Content
 
 // Cost
-cost.innerHTML += bike.costUS;
+displayCost.innerHTML += bike.costUS;
 
 //Qunatity And Sizes
 
@@ -34,21 +34,71 @@ for (let i = 0; i < bike.sizesWithQty.length; i++) {
   //Get Quantity of bikes in stock
   totalQty += bike.sizesWithQty[i].qty;
   if (bike.sizesWithQty[i].qty > 0) {
-    qty.innerHTML = `We have ${totalQty} bikes in stock`;
+    displayQty.innerHTML = `We have ${totalQty} bikes in stock`;
   } else {
-    qty.innerHTML = 'Sorry, we are out of stock';
+    displayQty.innerHTML = 'Sorry, we are out of stock';
   }
 
   // Show current Sizes for sale
   if (bike.sizesWithQty[i].qty > 1) {
-    frameSizes = ' ' + bike.sizesWithQty[i].size;
-    sizes.innerHTML += frameSizes;
+    frameSizes = bike.sizesWithQty[i].size;
+    displaySizes.innerHTML += ' ' + frameSizes;
 
     // Select buttons for frame size
     // input select size
-    selectSize.innerHTML += `<input type="radio" id="${frameSizes}" name="gender" value="${frameSizes}">
+    selectSize.innerHTML += `<input type="radio" name="frameSize" data-qty="${bike.sizesWithQty[i].qty}" value="${frameSizes}">
   <label for="${frameSizes}">${frameSizes}</label>`;
   }
 }
 
-// purchase a bike
+// select size
+
+// Select Size to work with
+let radios = document.querySelectorAll('input[type="radio"]');
+
+let itemsToPurchase = document.getElementById('purchaseQty');
+
+let removeItem = document.getElementById('removeQty');
+let addItem = document.getElementById('addQty');
+let qtyMessage = document.getElementById('qtyMessage');
+let currentCount = 1;
+let currentTotal = 0;
+let sizeQty = '';
+
+//console.log('what is this? ', addItem);
+
+for (var i = 0; i < radios.length; i++) {
+  sizeQty = '';
+  radios[i].onclick = function () {
+    sizeQty = this.dataset.qty;
+    //console.log(this.value + ' purchase amount = ' + sizeQty);
+  };
+}
+
+//console.log('current total is = ', currentTotal);
+
+removeItem.onclick = function (e) {
+  e.preventDefault();
+  //
+  if (currentTotal == 0) {
+    itemsToPurchase.innerHTML = 0;
+  } else {
+    currentTotal = currentTotal--;
+    console.log('current total should go down = ', currentTotal);
+  }
+};
+
+addItem.onclick = function (e) {
+  e.preventDefault();
+  //
+  currentTotal = '';
+  currentTotal = currentCount++;
+  itemsToPurchase.innerHTML = currentTotal;
+  console.log('current total is going up = ', currentTotal);
+  if (currentTotal >= sizeQty) {
+    itemsToPurchase.innerHTML = sizeQty;
+    qtyMessage.innerHTML = `We only have ${sizeQty} in stock`;
+  } else {
+    itemsToPurchase.innerHTML = currentTotal;
+  }
+};
