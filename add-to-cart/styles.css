@@ -1,0 +1,22 @@
+:root {
+  --border-radius: 2px;
+}
+
+#addRemoveQty {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 200px;
+}
+
+button {
+  padding: 8px 16px;
+  background-color: darkgoldenrod;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  border-style: none;
+}
+/* helper classes  */
+.sr-only {
+  display: none;
+}
