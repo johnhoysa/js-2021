@@ -5,10 +5,10 @@ const bike = {
   costUS: '$889.00',
   image: './imgs/bikes/weekender.jpg',
   sizesWithQty: [
-    { size: 'small', qty: 5 },
-    { size: 'medium', qty: 0 },
-    { size: 'large', qty: 4 },
-    { size: 'x-large', qty: 3 },
+    { size: 'small', qty: 15 },
+    { size: 'medium', qty: 23 },
+    { size: 'large', qty: 42 },
+    { size: 'x-large', qty: 34 },
   ],
 };
 
@@ -62,7 +62,7 @@ let removeItem = document.getElementById('removeQty');
 let addItem = document.getElementById('addQty');
 let qtyMessage = document.getElementById('qtyMessage');
 let currentCount = 1;
-let currentTotal = 0;
+let currentTotal = 1;
 let sizeQty = '';
 
 //console.log('what is this? ', addItem);
@@ -79,26 +79,35 @@ for (var i = 0; i < radios.length; i++) {
 
 removeItem.onclick = function (e) {
   e.preventDefault();
-  //
-  if (currentTotal == 0) {
-    itemsToPurchase.innerHTML = 0;
-  } else {
+
+  currentTotal = currentTotal--;
+  itemsToPurchase.innerHTML = currentTotal;
+
+  if (currentTotal <= sizeQty) {
+    itemsToPurchase.innerHTML = currentTotal;
     currentTotal = currentTotal--;
-    console.log('current total should go down = ', currentTotal);
+    console.log('remove item new total = ', currentTotal);
   }
 };
 
 addItem.onclick = function (e) {
   e.preventDefault();
   //
-  currentTotal = '';
   currentTotal = currentCount++;
   itemsToPurchase.innerHTML = currentTotal;
-  console.log('current total is going up = ', currentTotal);
+
+  if (currentTotal <= sizeQty) {
+    itemsToPurchase.innerHTML = currentTotal;
+    qtyMessage.innerHTML = `You can add more`;
+    console.log('current total b = ', currentTotal);
+  }
+
   if (currentTotal >= sizeQty) {
+    currentTotal = sizeQty;
+    console.log('current total c = ', sizeQty);
     itemsToPurchase.innerHTML = sizeQty;
     qtyMessage.innerHTML = `We only have ${sizeQty} in stock`;
-  } else {
-    itemsToPurchase.innerHTML = currentTotal;
   }
+
+  currentTotal == currentTotal;
 };
