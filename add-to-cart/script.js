@@ -77,19 +77,29 @@ for (var i = 0; i < radios.length; i++) {
 
 //console.log('current total is = ', currentTotal);
 
+// Not working
 removeItem.onclick = function (e) {
   e.preventDefault();
 
-  currentTotal = currentTotal--;
-  itemsToPurchase.innerHTML = currentTotal;
+  currentTotal == currentTotal--;
 
-  if (currentTotal <= sizeQty) {
+  console.log('remove item new total = ', currentTotal);
+
+  if (currentTotal >= 1) {
     itemsToPurchase.innerHTML = currentTotal;
-    currentTotal = currentTotal--;
-    console.log('remove item new total = ', currentTotal);
+    console.log('below zero yet = ', currentTotal);
+  }
+
+  // less than 1 item in cart
+  if (currentTotal <= 1) {
+    console.log('below zero in here');
+    currentTotal = 0;
+    itemsToPurchase.innerHTML = currentTotal;
+    console.log('below zero yet = ', currentTotal);
   }
 };
 
+// Working
 addItem.onclick = function (e) {
   e.preventDefault();
   //
@@ -109,5 +119,5 @@ addItem.onclick = function (e) {
     qtyMessage.innerHTML = `We only have ${sizeQty} in stock`;
   }
 
-  currentTotal == currentTotal;
+  //currentTotal = currentTotal;
 };
