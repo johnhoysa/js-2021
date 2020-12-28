@@ -5,10 +5,10 @@ const bike = {
   costUS: '$889.00',
   image: './imgs/bikes/weekender.jpg',
   sizesWithQty: [
-    { size: 'small', qty: 15 },
-    { size: 'medium', qty: 13 },
-    { size: 'large', qty: 12 },
-    { size: 'x-large', qty: 14 },
+    { size: 'small', qty: 5 },
+    { size: 'medium', qty: 4 },
+    { size: 'large', qty: 2 },
+    { size: 'x-large', qty: 6 },
   ],
 };
 
@@ -69,9 +69,11 @@ let sizeQty = '';
 
 for (var i = 0; i < radios.length; i++) {
   sizeQty = '';
+
   radios[i].onclick = function () {
     sizeQty = this.dataset.qty;
-    //console.log(this.value + ' purchase amount = ' + sizeQty);
+    currentTotal = 0;
+    itemsToPurchase.innerHTML = currentTotal;
   };
 }
 
