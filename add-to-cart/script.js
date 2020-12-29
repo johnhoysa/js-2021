@@ -5,7 +5,7 @@ const bike = {
   costUS: 889,
   sizesWithQty: [
     { size: 'small', qty: 15 },
-    { size: 'medium', qty: 14 },
+    { size: 'medium', qty: 3 },
     { size: 'large', qty: 12 },
     { size: 'x-large', qty: 16 },
   ],
@@ -24,9 +24,9 @@ let addItem = document.getElementById('addQty');
 let qtyMessage = document.getElementById('qtyMessage');
 
 // Create some of my own vars to help keep track of everything
-let totalQty = 0; // total bikes for sale
+let totalQty = 0; // total items for sale
 let currentTotal = 0; // number of items in cart
-let sizeQty = ''; // number of bikes per size
+let sizeQty = ''; // number of items per size
 
 // Set Content
 
@@ -35,10 +35,10 @@ displayCost.innerHTML += bike.costUS;
 
 //Qunatity And Sizes
 for (let i = 0; i < bike.sizesWithQty.length; i++) {
-  //Get Quantity of bikes in stock
+  //Get Quantity of items in stock
   totalQty += bike.sizesWithQty[i].qty;
   if (bike.sizesWithQty[i].qty > 0) {
-    displayQty.innerHTML = `We have ${totalQty} bikes in stock`;
+    displayQty.innerHTML = `We have ${totalQty} items in stock`;
   } else {
     displayQty.innerHTML = `We are sold out of ${bike.name}`;
   }
@@ -47,7 +47,7 @@ for (let i = 0; i < bike.sizesWithQty.length; i++) {
   if (bike.sizesWithQty[i].qty > 1) {
     frameSizes = bike.sizesWithQty[i].size;
     displaySizes.innerHTML += ' ' + frameSizes;
-    // Radio buttons for frame size
+    // Radio buttons for available items to purchase
     selectSize.innerHTML += `<input type="radio" name="frameSize" data-size="${bike.sizesWithQty[i].size}" data-qty="${bike.sizesWithQty[i].qty}" value="${frameSizes}">
   <label for="${frameSizes}">${frameSizes}</label>`;
   }
@@ -55,8 +55,7 @@ for (let i = 0; i < bike.sizesWithQty.length; i++) {
 // Now that radios are created access them here
 let radios = document.querySelectorAll('input[type="radio"]');
 
-// Loop through radio buttons to get data attributes from them.
-
+// Radio button information
 for (var i = 0; i < radios.length; i++) {
   //sizeQty = '';
   radios[i].onclick = function () {
@@ -80,7 +79,7 @@ removeItem.onclick = function (e) {
   // less than 1 item in cart
   if (currentTotal <= 0) {
     currentTotal = 0;
-    purchaseQty.innerHTML = currentTotal;
+    purchaseQty.innerHTML = 0;
   }
 };
 
@@ -108,6 +107,8 @@ addItem.onclick = function (e) {
 buyNow.onclick = function (e) {
   e.preventDefault();
   alert(
-    `if this was a real site your data would have been sent to your shopping cart`
+    `if this was a real site your data would have been sent to your shopping cart. You ordered ${sizeQty} ${
+      bike.name
+    } and will be charged $${bike.costUS * currentTotal}.00 at checkout.`
   );
 };
