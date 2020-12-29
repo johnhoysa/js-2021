@@ -27,7 +27,7 @@ let qtyMessage = document.getElementById('qtyMessage');
 let totalQty = 0; // total items for sale
 let currentTotal = 0; // number of items in cart
 let sizeQty = ''; // number of items per size
-
+let frameSizes = '';
 // Set Content
 
 // Cost of bike
@@ -37,6 +37,7 @@ displayCost.innerHTML += bike.costUS;
 for (let i = 0; i < bike.sizesWithQty.length; i++) {
   //Get Quantity of items in stock
   totalQty += bike.sizesWithQty[i].qty;
+
   if (bike.sizesWithQty[i].qty > 0) {
     displayQty.innerHTML = `We have ${totalQty} items in stock`;
   } else {
@@ -47,14 +48,14 @@ for (let i = 0; i < bike.sizesWithQty.length; i++) {
   if (bike.sizesWithQty[i].qty > 1) {
     frameSizes = bike.sizesWithQty[i].size;
 
-    console.log(frameSizes.split(' XXX '));
+    displaySizes.innerHTML += ' ' + frameSizes + ', ';
 
-    displaySizes.innerHTML += ' ' + frameSizes;
-    // Radio buttons for available items to purchase
+    // CREATE Radio Buttons for available items to purchase
     selectSize.innerHTML += `<input type="radio" name="frameSize" data-size="${bike.sizesWithQty[i].size}" data-qty="${bike.sizesWithQty[i].qty}" value="${frameSizes}">
   <label for="${frameSizes}">${frameSizes}</label>`;
   }
 }
+
 // Now that radios are created access them here
 let radios = document.querySelectorAll('input[type="radio"]');
 
@@ -83,6 +84,7 @@ removeItem.onclick = function (e) {
   if (currentTotal <= 0) {
     currentTotal = 0;
     purchaseQty.innerHTML = 0;
+    totalPrice.innerHTML = 0;
   }
 };
 
