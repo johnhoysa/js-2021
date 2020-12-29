@@ -46,6 +46,9 @@ for (let i = 0; i < bike.sizesWithQty.length; i++) {
   // Show current Sizes for sale
   if (bike.sizesWithQty[i].qty > 1) {
     frameSizes = bike.sizesWithQty[i].size;
+
+    console.log(frameSizes.split(' XXX '));
+
     displaySizes.innerHTML += ' ' + frameSizes;
     // Radio buttons for available items to purchase
     selectSize.innerHTML += `<input type="radio" name="frameSize" data-size="${bike.sizesWithQty[i].size}" data-qty="${bike.sizesWithQty[i].qty}" value="${frameSizes}">
@@ -71,12 +74,12 @@ removeItem.onclick = function (e) {
   e.preventDefault();
   currentTotal == currentTotal--; // remove items
   totalPrice.innerHTML = bike.costUS * currentTotal;
-  // More than 1 item in cart
+  // More than 1 item
   if (currentTotal >= 1) {
     purchaseQty.innerHTML = currentTotal;
   }
 
-  // less than 1 item in cart
+  // Zero items
   if (currentTotal <= 0) {
     currentTotal = 0;
     purchaseQty.innerHTML = 0;
@@ -98,17 +101,19 @@ addItem.onclick = function (e) {
   }
   // qty reached and not able to purchase more.
   if (currentTotal >= sizeQty) {
-    currentTotal = sizeQty;
+    currentTotal = sizeQty; // current total can not go higher then items in stock
     purchaseQty.innerHTML = sizeQty;
     qtyMessage.innerHTML = `We only have ${sizeQty} in stock`;
   }
 };
-// Buy Now action
+
+// Buy Now
 buyNow.onclick = function (e) {
   e.preventDefault();
   alert(
-    `if this was a real site your data would have been sent to your shopping cart. You ordered ${sizeQty} ${
-      bike.name
-    } and will be charged $${bike.costUS * currentTotal}.00 at checkout.`
+    `if this was a real site your data would have been sent to your shopping cart and the quantities would be updated in the database. 
+You ordered ${sizeQty} ${bike.name} and will be charged $${
+      bike.costUS * currentTotal
+    }.00 at checkout.`
   );
 };
