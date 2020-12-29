@@ -14,9 +14,9 @@
   <body>
     <h1>2020 Weekender Archer <span></span></h1>
     <div class="bike-info">
-      <p id="cost">Cost: <span></span></p>
-      <p id="qty">Quantity: <span></span></p>
-      <p id="size">Sizes avialable:<span></span></p>
+      <p id="displayCost">Cost: $<span></span></p>
+      <p id="displayQty">Quantity: <span></span></p>
+      <p id="displaySizes">Sizes avialable:<span></span></p>
     </div>
     <div class="purchase-info">
       <h2>Purcahse a bike</h2>
@@ -33,6 +33,8 @@
           </button>
         </div>
         <span id="qtyMessage"></span>
+        <p>Total: <span id="totalPrice">$00.00</span></p>
+        <button id="buyNow">Buy Now</button>
       </form>
     </div>
     <script src="./script.js"></script>
