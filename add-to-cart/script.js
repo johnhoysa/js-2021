@@ -1,129 +1,121 @@
 // Bike information
-// Hardcoded here since no API.
+// Hardcoded here since no API, content that needs to be dynamic
 const bike = {
   name: '2020 Weekender Archer',
-  costUS: '$889.00',
-  image: './imgs/bikes/weekender.jpg',
+  costUS: 889,
   sizesWithQty: [
-    { size: 'small', qty: 5 },
-    { size: 'medium', qty: 4 },
-    { size: 'large', qty: 2 },
-    { size: 'x-large', qty: 6 },
+    { size: 'small', qty: 15 },
+    { size: 'medium', qty: 3 },
+    { size: 'large', qty: 12 },
+    { size: 'x-large', qty: 16 },
   ],
 };
 
 // Get DOM elements
-let displayCost = document.querySelector('#cost > span');
-let displayQty = document.querySelector('#qty > span');
-let displaySizes = document.querySelector('#size > span');
-
-//
+let displayCost = document.querySelector('#displayCost > span');
+let displayQty = document.querySelector('#displayQty > span');
+let displaySizes = document.querySelector('#displaySizes > span');
 let selectSize = document.getElementById('selectSize');
+let totalPrice = document.querySelector('#totalPrice');
+let buyNow = document.querySelector('#buyNow');
+let purchaseQty = document.getElementById('purchaseQty');
+let removeItem = document.getElementById('removeQty');
+let addItem = document.getElementById('addQty');
+let qtyMessage = document.getElementById('qtyMessage');
 
-//
-let totalQty = 0;
-
+// Create some of my own vars to help keep track of everything
+let totalQty = 0; // total items for sale
+let currentTotal = 0; // number of items in cart
+let sizeQty = ''; // number of items per size
+let frameSizes = '';
 // Set Content
 
-// Cost
+// Cost of bike
 displayCost.innerHTML += bike.costUS;
 
 //Qunatity And Sizes
-
 for (let i = 0; i < bike.sizesWithQty.length; i++) {
-  //Get Quantity of bikes in stock
+  //Get Quantity of items in stock
   totalQty += bike.sizesWithQty[i].qty;
+
   if (bike.sizesWithQty[i].qty > 0) {
-    displayQty.innerHTML = `We have ${totalQty} bikes in stock`;
+    displayQty.innerHTML = `We have ${totalQty} items in stock`;
   } else {
-    displayQty.innerHTML = 'Sorry, we are out of stock';
+    displayQty.innerHTML = `We are sold out of ${bike.name}`;
   }
 
   // Show current Sizes for sale
   if (bike.sizesWithQty[i].qty > 1) {
     frameSizes = bike.sizesWithQty[i].size;
-    displaySizes.innerHTML += ' ' + frameSizes;
 
-    // Select buttons for frame size
-    // input select size
-    selectSize.innerHTML += `<input type="radio" name="frameSize" data-qty="${bike.sizesWithQty[i].qty}" value="${frameSizes}">
+    displaySizes.innerHTML += ' ' + frameSizes + ', ';
+
+    // CREATE Radio Buttons for available items to purchase
+    selectSize.innerHTML += `<input type="radio" name="frameSize" data-size="${bike.sizesWithQty[i].size}" data-qty="${bike.sizesWithQty[i].qty}" value="${frameSizes}">
   <label for="${frameSizes}">${frameSizes}</label>`;
   }
 }
 
-// select size
-
-// Select Size to work with
+// Now that radios are created access them here
 let radios = document.querySelectorAll('input[type="radio"]');
 
-let itemsToPurchase = document.getElementById('purchaseQty');
-
-let removeItem = document.getElementById('removeQty');
-let addItem = document.getElementById('addQty');
-let qtyMessage = document.getElementById('qtyMessage');
-let currentCount = 1;
-let currentTotal = 0;
-let sizeQty = '';
-
-//console.log('what is this? ', addItem);
-
+// Radio button information
 for (var i = 0; i < radios.length; i++) {
-  sizeQty = '';
-
+  //sizeQty = '';
   radios[i].onclick = function () {
-    sizeQty = this.dataset.qty;
-    currentTotal = 0;
-    itemsToPurchase.innerHTML = currentTotal;
+    currentTotal = 0; // clear out total if changed frame size
+    sizeQty = this.dataset.qty; // get number of items aviaible to sell
+    purchaseQty.innerHTML = currentTotal;
+    qtyMessage.innerHTML = `You selected the ${this.dataset.size} size frame!`;
   };
 }
 
-//console.log('current total is = ', currentTotal);
-
+// Remove item
 removeItem.onclick = function (e) {
   e.preventDefault();
-
-  currentTotal == currentTotal--;
-
-  console.log('current total is, from remove = ', currentTotal);
-
+  currentTotal == currentTotal--; // remove items
+  totalPrice.innerHTML = bike.costUS * currentTotal;
+  // More than 1 item
   if (currentTotal >= 1) {
-    itemsToPurchase.innerHTML = currentTotal;
-    console.log('below zero yet = ', currentTotal);
+    purchaseQty.innerHTML = currentTotal;
   }
 
-  // less than 1 item in cart
-  if (currentTotal <= 1) {
-    console.log('below zero in here');
+  // Zero items
+  if (currentTotal <= 0) {
     currentTotal = 0;
-    itemsToPurchase.innerHTML = currentTotal;
-    console.log('below zero yet = ', currentTotal);
+    purchaseQty.innerHTML = 0;
+    totalPrice.innerHTML = 0;
   }
-  currentTotal == currentTotal;
-  console.log('current total from remove area = ', currentTotal);
 };
 
+// Add item
 addItem.onclick = function (e) {
   e.preventDefault();
-  //
-
   currentTotal == currentTotal++;
+  purchaseQty.innerHTML = currentTotal;
 
-  console.log('current total from add area = ', currentTotal);
+  totalPrice.innerHTML = `$${bike.costUS * currentTotal}`;
 
-  itemsToPurchase.innerHTML = currentTotal;
-
+  // Under qty
   if (currentTotal <= sizeQty) {
-    itemsToPurchase.innerHTML = currentTotal;
+    purchaseQty.innerHTML = currentTotal;
     qtyMessage.innerHTML = `You can add more`;
-    console.log('current total b = ', currentTotal);
   }
-
+  // qty reached and not able to purchase more.
   if (currentTotal >= sizeQty) {
-    currentTotal = sizeQty;
-    console.log('current total c = ', sizeQty);
-    itemsToPurchase.innerHTML = sizeQty;
+    currentTotal = sizeQty; // current total can not go higher then items in stock
+    purchaseQty.innerHTML = sizeQty;
     qtyMessage.innerHTML = `We only have ${sizeQty} in stock`;
   }
+};
 
-  //currentTotal = currentTotal;
+// Buy Now
+buyNow.onclick = function (e) {
+  e.preventDefault();
+  alert(
+    `if this was a real site your data would have been sent to your shopping cart and the quantities would be updated in the database. 
+You ordered ${sizeQty} ${bike.name} and will be charged $${
+      bike.costUS * currentTotal
+    }.00 at checkout.`
+  );
 };
