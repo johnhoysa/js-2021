@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>
+        Fetch API - Post <small>I made no changes to this code example</small>
+      </h1>
+      <hr />
+      <form id="fetchForm">
+        <div class="form-group">
+          <label for="titleInput">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="titleInput"
+            placeholder="Enter Title Here"
+          />
+        </div>
+        <div class="form-group">
+          <label for="bodyInput">Body</label>
+          <textarea
+            class="form-control"
+            id="bodyInput"
+            rows="3"
+            placeholder="Enter Post Body Here"
+          ></textarea>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Submit" />
+      </form>
+      <hr />
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <p class="card-text"></p>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
