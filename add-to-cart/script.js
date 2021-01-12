@@ -56,7 +56,7 @@ for (let i = 0; i < bike.sizesWithQty.length; i++) {
   }
 }
 
-// Now that radios are created access them here
+// Now that radios are created access them
 let radios = document.querySelectorAll('input[type="radio"]');
 
 // Radio button information
@@ -114,8 +114,6 @@ buyNow.onclick = function (e) {
   e.preventDefault();
   alert(
     `if this was a real site your data would have been sent to your shopping cart and the quantities would be updated in the database. 
-You ordered ${sizeQty} ${bike.name} and will be charged $${
-      bike.costUS * currentTotal
-    }.00 at checkout.`
+You ordered ${sizeQty} ${bike.name} and will be charged $${bike.costUS * currentTotal}.00 at checkout.`
   );
 };
