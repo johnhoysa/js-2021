@@ -60,6 +60,8 @@ async function getBeers() {
   const beerPromise = await fetch(url);
   const beers = await beerPromise.json();
 
+  //console.log('what is a beer value in json? ', beers);
+
   // pagination
   pageText.innerText = page;
 
