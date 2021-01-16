@@ -4,19 +4,22 @@
   </head>
   <body>
     <h1>Amazing Currency Converter</h1>
-    <p>Convert</p>
-    <label id="currencySymbol" for="currencyAmount">$</label>
-    <input type="number" id="currencyAmount" name="currencyAmount" placeholder="amount" value="1" />
-    <select name="currencyStart" id="currencyStart">
-      <option value="Select" data-rate="0">Select Option</option>
-      <option value="American Dollar" data-rate="1" data-symbol="$">American Dollar</option>
-      <option value="Euro" data-rate="0.83" data-symbol="€">Euro</option>
-      <option value="Yen" data-rate="0.0096" data-symbol="￥">Yen</option>
-      <option value="Pound" data-rate="1.36" data-symbol="£">Pound</option>
-      <option value="Canadian" data-rate="0.79" data-symbol="C$">Canadian Dollar</option>
-      <option value="Franc" data-rate="0.89" data-symbol="&#8355;">Swiss Franc</option>
-    </select>
+    <div class="starting-amount">
+      <label id="currencySymbol" for="currencyAmount">$</label>
+      <input type="number" id="currencyAmount" name="currencyAmount" placeholder="amount" value="1" />
+
+      <select name="currencyStart" id="currencyStart">
+        <option value="Select" data-rate="0">Select Option</option>
+        <option value="American Dollar" data-rate="1" data-symbol="$">American Dollar</option>
+        <option value="Euro" data-rate="0.83" data-symbol="€">Euro</option>
+        <option value="Yen" data-rate="0.0096" data-symbol="￥">Yen</option>
+        <option value="Pound" data-rate="1.36" data-symbol="£">Pound</option>
+        <option value="Canadian" data-rate="0.79" data-symbol="C$">Canadian Dollar</option>
+        <option value="Franc" data-rate="0.89" data-symbol="&#8355;">Swiss Franc</option>
+      </select>
+    </div>
     <p>To</p>
+
     <select name="currencyEnding" id="currencyEnd">
       <option value="Select" data-rate="0">Select Option</option>
       <option value="American Dollar" data-rate="1" data-symbol="$">American Dollar</option>
@@ -27,9 +30,9 @@
       <option value="Franc" data-rate="0.89" data-symbol="&#8355;">Swiss Franc</option>
     </select>
 
-    <!-- <button id="convertBtn">Exchange my money now!</button> -->
     <p id="finalValue">Converted 💰 will appear here.</p>
 
+    <p class="disclaimer">Disclaimer: This still needs some work and may not be accurate.</p>
     <script src="script.js"></script>
   </body>
 </html>
