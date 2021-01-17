@@ -8,14 +8,17 @@ const exchangeStart = document.querySelector('#currencyStart');
 const exchangeEnd = document.querySelector('#currencyEnd');
 
 const finalValue = document.getElementById('finalValue');
-
+const resetBtn = document.getElementById('resetBtn');
 // Create vars to use later within functions
 let exchangeStartValue = '';
 let exchangeStartRate = 1; // default since everything is based on the dollar
 let convertedToAmerican = '';
 let inputedAmount = '';
-// on select change get values to convert
+
+// Run functions on click, change or more oh my
 exchangeStart.addEventListener('change', getStartingCurrencyType);
+exchangeEnd.addEventListener('change', getEndingCurrencyType);
+resetBtn.addEventListener('click', resetItems);
 
 function getStartingCurrencyType() {
   // Get current selected option
@@ -31,7 +34,7 @@ function getStartingCurrencyType() {
   exchangeStartRate = Number(selectedStartCurrencyOption.dataset.rate);
 
   // Get inputed amount to convert, make it a number
-  inputedAmount = Number(numToConvert.value);
+  inputedAmount = numToConvert.value;
 
   // Take inputed amount and convert to US Dollars
   convertedToAmerican = inputedAmount * exchangeStartRate;
@@ -41,8 +44,6 @@ function getStartingCurrencyType() {
   console.log('what is my exchange rate ', exchangeStartRate);
   console.log('what is my converted amount in US $' + convertedToAmerican);
 }
-
-exchangeEnd.addEventListener('change', getEndingCurrencyType);
 
 function getEndingCurrencyType() {
   // Get current selected option
@@ -61,7 +62,7 @@ function getEndingCurrencyType() {
   exchangeEndRate = Number(selectedEndCurrencyOption.dataset.rate);
 
   // Convert USD to selected option then format the number
-  convertedValue = convertedToAmerican * exchangeEndRate;
+  convertedValue = exchangeEndRate * convertedToAmerican;
   convertedFormattedValue = convertedValue.toFixed(2);
 
   finalValue.innerHTML =
@@ -80,13 +81,25 @@ function getEndingCurrencyType() {
   console.log('what is FINAL my converted amount ' + convertedValue);
 }
 
-//
+// Rest Btn
+function resetItems(e) {
+  e.preventDefault();
+  // Reset Input
+  currencyStartSymbol.innerText = '$';
+  numToConvert.value = 1;
+  // Reset Selects
+  exchangeStart.selectedIndex = 0;
+  exchangeEnd.selectedIndex = 0;
+
+  console.log('Reset Ran Here');
+}
 //
 
 /* 
 
 TO DOs, or not to dos.
 - Format numbers better
+- Validate input field 
 - If both items are selected and user updates value of input or select option run it all again
 - When compairing the same currancy do not run any conversions and just pass the input value.
 - Use an API to import correct exchange rates
