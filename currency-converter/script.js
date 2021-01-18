@@ -16,9 +16,15 @@ let convertedToAmerican = '';
 let inputedAmount = '';
 
 // Run functions on click, change or more oh my
+numToConvert.addEventListener('change', tryThis);
 exchangeStart.addEventListener('change', getStartingCurrencyType);
 exchangeEnd.addEventListener('change', getEndingCurrencyType);
 resetBtn.addEventListener('click', resetItems);
+
+function tryThis() {
+  getStartingCurrencyType();
+  getEndingCurrencyType();
+}
 
 function getStartingCurrencyType() {
   // Get current selected option
@@ -62,7 +68,9 @@ function getEndingCurrencyType() {
   exchangeEndRate = Number(selectedEndCurrencyOption.dataset.rate);
 
   // Convert USD to selected option then format the number
+
   convertedValue = exchangeEndRate * convertedToAmerican;
+
   convertedFormattedValue = convertedValue.toFixed(2);
 
   finalValue.innerHTML =
@@ -90,7 +98,8 @@ function resetItems(e) {
   // Reset Selects
   exchangeStart.selectedIndex = 0;
   exchangeEnd.selectedIndex = 0;
-
+  // Reset Message
+  finalValue.innerHTML = 'Converted 💰 will appear here.';
   console.log('Reset Ran Here');
 }
 //
@@ -101,6 +110,7 @@ TO DOs, or not to dos.
 - Format numbers better
 - Validate input field 
 - If both items are selected and user updates value of input or select option run it all again
+- Handle errors if both selects not working
 - When compairing the same currancy do not run any conversions and just pass the input value.
 - Use an API to import correct exchange rates
 
