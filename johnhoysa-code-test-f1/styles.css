@@ -1,0 +1,13 @@
+.items {
+  list-style-type: disc;
+}
+.items li span {
+  display: none;
+}
+
+.items li:nth-child(3n + 3) span {
+  display: block;
+}
+.items li:nth-child(5n + 5) span {
+  display: block;
+}
