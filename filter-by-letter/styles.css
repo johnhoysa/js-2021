@@ -1,0 +1,65 @@
+:root {
+  --color-black: #001427;
+  --color-green: #708d81;
+  --color-yellow: #f4d58d;
+  --color-orange: #bf0603;
+  --color-red: #8d0801;
+  --color-white: #ffffff;
+  --font-family: 'Roboto', sans-serif;
+  --font-regular: 400;
+  --font-bold: 900;
+  --transition-speed: 0.5s;
+}
+body {
+  background-color: var(--color-white);
+}
+h1,
+p,
+ul,
+li {
+  color: var(--color-black);
+  font-family: var(--font-family);
+  font-size: 16px;
+}
+h1 {
+  font-size: 24px;
+  font-weight: var(--font-bold);
+}
+.filter-btn,
+.filter-reset {
+  padding: 8px 16px;
+  background-color: var(--color-orange);
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  color: var(--color-yellow);
+  cursor: pointer;
+  transition: background var(--transition-speed) ease-in-out;
+}
+.filter-btn:hover,
+.filter-reset:hover {
+  background-color: var(--color-red);
+  transition: background var(--transition-speed) ease-in-out;
+}
+.filter-btn {
+  margin-right: 16px;
+}
+.filter-item {
+  margin-top: 0;
+  font-weight: var(--font-regular);
+  opacity: 1;
+  height: 24px;
+  transition: all 0.4s ease-out;
+}
+.filter-item-remove {
+  opacity: 0;
+  height: 0px;
+}
+.button-highlight {
+  font-weight: var(--font-bold);
+  background-color: var(--color-red);
+}
+.text-highlight {
+  color: var(--color-red);
+  font-weight: var(--font-bold);
+}
